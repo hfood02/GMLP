@@ -67,22 +67,13 @@ endif
 ###########################################################
 HEADERS =                         \
 	$(wildcard utilities/*.cuh)   \
-	$(wildcard main_gpumd/*.cuh)  \
-	$(wildcard integrate/*.cuh)   \
-	$(wildcard mc/*.cuh)          \
-	$(wildcard minimize/*.cuh)    \
-	$(wildcard force/*.cuh)       \
-	$(wildcard measure/*.cuh)     \
-	$(wildcard model/*.cuh)       \
-	$(wildcard phonon/*.cuh)      \
-	$(wildcard main_nep/*.cuh)    \
 	$(wildcard main_nep_adam/*.cuh)
 
 
 ###########################################################
 # executables
 ###########################################################
-all: gpumd nep nep_adam
+all: nep_adam
 # gpumd: $(OBJ_GPUMD)
 # 	$(CC) $(LDFLAGS) $^ -o $@ $(LIBS)
 # nep: $(OBJ_NEP)
@@ -95,25 +86,7 @@ nep_adam: $(OBJ_NEP_ADAM)
 # rules for building object files
 ###########################################################
 ifdef OS # for Windows
-integrate/%.obj: integrate/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-mc/%.obj: mc/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-minimize/%.obj: minimize/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-force/%.obj: force/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-measure/%.obj: measure/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-main_gpumd/%.obj: main_gpumd/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 utilities/%.obj: utilities/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-model/%.obj: model/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-phonon/%.obj: phonon/%.cu $(HEADERS)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-main_nep/%.obj: main_nep/%.cu $(HEADERS)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 main_nep_adam/%.obj: main_nep_adam/%.cu $(HEADERS)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
